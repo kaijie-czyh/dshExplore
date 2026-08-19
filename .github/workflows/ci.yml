@@ -1,0 +1,61 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build & test (node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["18", "20", "22"]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup node ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: dsh-trajectory/package-lock.json
+
+      - name: cache npm
+        uses: actions/cache@v4
+        with:
+          path: dsh-trajectory/.npm-cache
+          key: npm-${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('dsh-trajectory/package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-${{ matrix.node }}-
+
+      - name: install
+        working-directory: dsh-trajectory
+        run: npm ci
+
+      - name: build
+        working-directory: dsh-trajectory
+        run: npm run build
+
+      - name: test
+        working-directory: dsh-trajectory
+        run: npm test
+
+      - name: smoke (cli ls)
+        working-directory: dsh-trajectory
+        run: |
+          mkdir -p .tmp
+          node dist/cli/index.js --store .tmp/ci.db ingest examples/session-a.jsonl
+          node dist/cli/index.js --store .tmp/ci.db ingest examples/session-b.jsonl
+          node dist/cli/index.js --store .tmp/ci.db ls
+          node dist/cli/index.js --store .tmp/ci.db diff sess-A sess-B
+          node dist/cli/index.js --store .tmp/ci.db compare sess-A sess-B -o .tmp/compare.html
+          test -s .tmp/compare.html

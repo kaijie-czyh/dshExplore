@@ -1,0 +1,13 @@
+{"kind":"turn/start","sessionId":"sess-B","seq":1,"ts":2000,"source":"core/agent"}
+{"kind":"user/message","sessionId":"sess-B","seq":2,"ts":2010,"text":"List the files in this repo and tell me which are stale."}
+{"kind":"step/start","sessionId":"sess-B","seq":3,"ts":2020,"stepIndex":0}
+{"kind":"assistant/message","sessionId":"sess-B","seq":4,"ts":2030,"text":"I'll scan the repo and look for stale files."}
+{"kind":"tool/call","sessionId":"sess-B","seq":5,"ts":2040,"toolName":"shell","arguments":{"cmd":"ls -la"}}
+{"kind":"tool/result","sessionId":"sess-B","seq":6,"ts":2500,"toolName":"shell","ok":true,"result":"...listing..."}
+{"kind":"step/end","sessionId":"sess-B","seq":7,"ts":2510,"stepIndex":0}
+{"kind":"step/start","sessionId":"sess-B","seq":8,"ts":2520,"stepIndex":1}
+{"kind":"assistant/message","sessionId":"sess-B","seq":9,"ts":2530,"text":"Five files look stale."}
+{"kind":"tool/call","sessionId":"sess-B","seq":10,"ts":2540,"toolName":"grep.search","arguments":{"pattern":"TODO"}}
+{"kind":"tool/result","sessionId":"sess-B","seq":11,"ts":2700,"toolName":"grep.search","ok":false,"error":"timeout","result":null}
+{"kind":"step/end","sessionId":"sess-B","seq":12,"ts":2710,"stepIndex":1}
+{"kind":"turn/end","sessionId":"sess-B","seq":13,"ts":2720,"steps":2}

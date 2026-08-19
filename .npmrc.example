@@ -1,0 +1,11 @@
+# Sample .npmrc for maintainers who need a faster or different npm registry.
+#
+# Copy this file to .npmrc (which is git-ignored) and adjust as needed.
+# In most environments you can run `npm install` with no .npmrc at all and
+# the default registry (registry.npmjs.org) will be used.
+
+# If the default registry is slow in your region, point at a mirror:
+# registry=https://registry.npmmirror.com
+
+# If you want the npm cache under this repo (e.g. CI with read-only HOME):
+# cache=./.npm-cache

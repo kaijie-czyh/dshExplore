@@ -1,0 +1,13 @@
+{"kind":"turn/start","sessionId":"sess-A","seq":1,"ts":1000,"source":"core/agent"}
+{"kind":"user/message","sessionId":"sess-A","seq":2,"ts":1010,"text":"List the files in this repo and tell me which are stale."}
+{"kind":"step/start","sessionId":"sess-A","seq":3,"ts":1020,"stepIndex":0}
+{"kind":"assistant/message","sessionId":"sess-A","seq":4,"ts":1030,"text":"I'll scan the repo and look for stale files."}
+{"kind":"tool/call","sessionId":"sess-A","seq":5,"ts":1040,"toolName":"shell","arguments":{"cmd":"ls -la"}}
+{"kind":"tool/result","sessionId":"sess-A","seq":6,"ts":1500,"toolName":"shell","ok":true,"result":"...listing..."}
+{"kind":"step/end","sessionId":"sess-A","seq":7,"ts":1510,"stepIndex":0}
+{"kind":"step/start","sessionId":"sess-A","seq":8,"ts":1520,"stepIndex":1}
+{"kind":"assistant/message","sessionId":"sess-A","seq":9,"ts":1530,"text":"Three files look stale."}
+{"kind":"tool/call","sessionId":"sess-A","seq":10,"ts":1540,"toolName":"fs.read","arguments":{"path":"a.js"}}
+{"kind":"tool/result","sessionId":"sess-A","seq":11,"ts":1600,"toolName":"fs.read","ok":true,"result":"..."}
+{"kind":"step/end","sessionId":"sess-A","seq":12,"ts":1610,"stepIndex":1}
+{"kind":"turn/end","sessionId":"sess-A","seq":13,"ts":1620,"steps":2}

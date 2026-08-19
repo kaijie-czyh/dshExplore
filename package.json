@@ -1,0 +1,57 @@
+{
+  "name": "dsh-trajectory",
+  "version": "0.2.0",
+  "description": "Independent toolkit for DeepSeek Harness (DSH): append-only trajectory indexer, replay CLI, diff CLI, and a minimal Compare web view. Built on the public session/event stream; no core patches.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "dsh-trajectory": "dist/cli/index.js"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -w -p tsconfig.json",
+    "start": "node dist/cli/index.js",
+    "test": "node --test test/",
+    "verify:cordis": "node scripts/verify-cordis-only.mjs",
+    "verify:mock-llm": "node scripts/verify-with-mock-llm.mjs",
+    "clean": "node -e \"import('node:fs').then(fs => fs.rmSync('dist', { recursive: true, force: true }))\"",
+    "prepublishOnly": "npm run clean && npm run build && npm test"
+  },
+  "engines": {
+    "node": ">=18.18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaijie-czyh/dshExplore.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kaijie-czyh/dshExplore/issues"
+  },
+  "homepage": "https://github.com/kaijie-czyh/dshExplore#readme",
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-llm-mock-server": "^0.0.1-rc.1",
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^20.16.10",
+    "typescript": "^5.5.4"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "agent",
+    "trajectory",
+    "eval",
+    "replay",
+    "diff"
+  ]
+}
