@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/dsh-trajectory"
+    directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
