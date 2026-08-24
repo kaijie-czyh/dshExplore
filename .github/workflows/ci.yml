@@ -19,23 +19,18 @@ jobs:
         node: ["18", "20", "22"]
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
+      # v4 of these actions run on Node 20, which GitHub deprecates on 2025-09-19
+      # and auto-forces to Node 24. v5+ run on Node 24 natively.
+      # See https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: setup node ${{ matrix.node }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
           cache: npm
           cache-dependency-path: dsh-trajectory/package-lock.json
-
-      - name: cache npm
-        uses: actions/cache@v4
-        with:
-          path: dsh-trajectory/.npm-cache
-          key: npm-${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('dsh-trajectory/package-lock.json') }}
-          restore-keys: |
-            npm-${{ runner.os }}-${{ matrix.node }}-
 
       - name: install
         working-directory: dsh-trajectory
