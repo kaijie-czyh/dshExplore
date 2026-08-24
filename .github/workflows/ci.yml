@@ -29,8 +29,10 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
-          cache: npm
-          cache-dependency-path: dsh-trajectory/package-lock.json
+          # Intentionally no `cache: npm` — setup-node v5 resolves the lock file
+          # against $GITHUB_WORKSPACE and fails fast when the path is not found,
+          # which is our case (package-lock.json lives at dsh-trajectory/package-lock.json).
+          # A flat (no-cache) install is ~10s on our dependency set.
 
       - name: install
         working-directory: dsh-trajectory
