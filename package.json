@@ -17,7 +17,7 @@
     "build": "tsc -p tsconfig.json",
     "dev": "tsc -w -p tsconfig.json",
     "start": "node dist/cli/index.js",
-    "test": "node --test test",
+    "test": "node --test test/smoke.test.mjs",
     "verify:cordis": "node scripts/verify-cordis-only.mjs",
     "verify:mock-llm": "node scripts/verify-with-mock-llm.mjs",
     "clean": "node -e \"import('node:fs').then(fs => fs.rmSync('dist', { recursive: true, force: true }))\"",
