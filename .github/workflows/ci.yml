@@ -20,7 +20,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       # The repository root IS the package (no monorepo wrapper), so all
-      # steps run at $GITHUB_WORKSPACE — no working-directory override needed.
+      # steps run at $GITHUB_WORKSPACE -- no working-directory override needed.
       # setup-node v5+ no longer auto-resolves a cache path, so we leave it off.
       - name: checkout
         uses: actions/checkout@v5
