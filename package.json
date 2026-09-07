@@ -39,10 +39,10 @@
     "commander": "^12.1.0"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/cordis": "^4.0.2",
     "@deepseek-ai/dsh-llm-mock-server": "^0.0.1-rc.1",
     "@types/better-sqlite3": "^7.6.11",
-    "@types/node": "^20.16.10",
+    "@types/node": "^26.4.1",
     "typescript": "^5.5.4"
   },
   "keywords": [
